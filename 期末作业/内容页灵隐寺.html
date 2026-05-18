@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>灵隐寺 · 云林禅寺 | 千年古刹 仙灵所隐</title>
+    <!-- 引入 Google Fonts 优雅字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f3ec;  /* 古纸色调 */
+            font-family: 'Inter', sans-serif;
+            color: #2c2a27;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2d9cf;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9b7b5c;
+            border-radius: 8px;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* 导航栏 (仿图中的导航栏布局) */
+        .navbar {
+            background: rgba(30, 28, 25, 0.92);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(210, 180, 140, 0.3);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .logo-icon {
+            font-size: 1.7rem;
+            color: #e7cba5;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            color: #f3e3c2;
+        }
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #c9b18b;
+            margin-left: 6px;
+            font-style: italic;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ece2d4;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover {
+            color: #e7bc7e;
+        }
+        @media (max-width: 800px) {
+            .nav-links {
+                gap: 1.2rem;
+            }
+            .logo-text { font-size: 1.2rem; }
+            .container { padding: 0 20px; }
+        }
+        @media (max-width: 650px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+        }
+
+        /* 主视觉区: 寺隐雲 意境 */
+        .hero {
+            background: linear-gradient(rgba(20, 18, 16, 0.5), rgba(20, 18, 16, 0.6)), url('https://picsum.photos/id/104/1600/700?grayscale') center/cover no-repeat;
+            /* 用灵隐寺类似山寺氛围图, 由于无法使用外链真实图片? 选用古典山景图代替，但体现禅意 */
+            background-image: linear-gradient(105deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://picsum.photos/id/96/1600/700');
+            background-size: cover;
+            background-position: center 30%;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            color: white;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
+        }
+        .hero-content h1 {
+            font-size: 5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 8px;
+        }
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-top: 0.8rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        .hero-tag {
+            margin-top: 2rem;
+            font-style: italic;
+            border-top: 1px solid rgba(255,255,240,0.5);
+            display: inline-block;
+            padding-top: 0.8rem;
+        }
+        @media (max-width: 700px) {
+            .hero-content h1 { font-size: 2.8rem; letter-spacing: 4px;}
+        }
+
+        /* 通用板块样式 */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e2d5c4;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-left: 5px solid #b78c5a;
+            padding-left: 20px;
+            margin-bottom: 2rem;
+            color: #3d2b1c;
+        }
+        .section-sub {
+            color: #7e5e41;
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .grid-2cols {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: #fffef7;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -8px rgba(0,0,0,0.08);
+            padding: 1.8rem;
+            flex: 1 1 280px;
+            transition: all 0.2s ease;
+            border: 1px solid #efe3d4;
+        }
+        .card i {
+            font-size: 2.2rem;
+            color: #b68654;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .badge {
+            background: #e9e0d3;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            margin-top: 0.8rem;
+            color: #624c38;
+        }
+
+        /* 历史 + 地理融合双列 */
+        .history-geo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .history-box, .geo-box {
+            flex: 1;
+            background: #fffbf5;
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        .timeline-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #c8aa7a;
+        }
+
+        /* 建筑与景观特色画廊 */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.2rem;
+        }
+        .arch-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 18px -10px rgba(0,0,0,0.1);
+        }
+        .arch-img {
+            height: 200px;
+            background: #cdbc9d;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 12px;
+        }
+        .arch-img span {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+        .arch-card .content {
+            padding: 1.2rem 1.2rem 1.5rem;
+        }
+        /* 模拟寺庙图占位 (由于无法使用实际灵隐寺图片，采用接近色块+象征性图片来自 picsum 但保留意境) */
+        .img-tianwang { background-image: url('https://picsum.photos/id/157/400/260'); background-size: cover; }
+        .img-daxiong { background-image: url('https://picsum.photos/id/133/400/260'); background-size: cover; }
+        .img-feilaifeng { background-image: url('https://picsum.photos/id/129/400/260'); background-size: cover; }
+        .img-luohan { background-image: url('https://picsum.photos/id/116/400/260'); background-size: cover; }
+
+        /* 文化地位 & 济公 */
+        .culture-show {
+            background: #f1ede5;
+            border-radius: 36px;
+            padding: 2rem 2rem 2rem 2rem;
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .culture-text {
+            flex: 2;
+        }
+        .culture-quote {
+            flex: 1;
+            background: #faf6ef;
+            border-radius: 28px;
+            padding: 1.5rem;
+            font-style: italic;
+            border-left: 4px solid #b78c5a;
+        }
+
+        /* 旅游信息卡片精美 */
+        .info-wrapper {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 2rem;
+            background: #fffcf5;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+        .info-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        .info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        .price-tag {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #b1622c;
+        }
+        .btn-map {
+            background: #b78c5a;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-map:hover {
+            background: #9b6d42;
+        }
+        footer {
+            background: #1f1c18;
+            color: #cfc3b4;
+            padding: 3rem 0 2rem;
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-links i {
+            margin: 0 6px;
+            color: #b5956e;
+        }
+        .heart {
+            color: #c97e5a;
+        }
+
+        /* 三屏以上保证内容充沛 */
+        .spacer-min {
+            min-height: 2rem;
+        }
+        hr {
+            border: none;
+            border-top: 2px dotted #e0cfbc;
+            margin: 1rem 0;
+        }
+        @media (max-width: 600px) {
+            section { padding: 2.5rem 0; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 完全按照图片顶部菜单风格：首页 概况 美景 美食 住宿 攻略 交通 风物 趣闻 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-area">
+            <i class="fas fa-temple logo-icon"></i>
+            <span class="logo-text">灵隐寺</span>
+            <span class="logo-sub">· 云林禅寺</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">概况</a></li>
+            <li><a href="#">美景</a></li>
+            <li><a href="#">美食</a></li>
+            <li><a href="#">住宿</a></li>
+            <li><a href="#">攻略</a></li>
+            <li><a href="#">交通</a></li>
+            <li><a href="#">风物</a></li>
+            <li><a href="#">趣闻</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero 区: 寺隐雲 意境 -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>寺隐雲 · 灵境</h1>
+        <p>飞来峰下，古木参天；千年梵音，仙灵所隐</p>
+        <div class="hero-tag">
+            <i class="fas fa-leaf"></i> 东晋开山 · 禅宗祖庭 <i class="fas fa-dharmachakra"></i>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <!-- 概况 + 历史渊源区块 (满足历史信息完整) -->
+    <section>
+        <h2 class="section-title">⛩️ 古刹春秋 · 灵隐史话</h2>
+        <div class="history-geo">
+            <div class="history-box">
+                <h3><i class="fas fa-history"></i> 历史渊源</h3>
+                <div class="timeline-item"><strong>📅 始建于东晋咸和元年（326年）</strong><br>距今近1700年，杭州最早名刹，中国佛教禅宗十大古刹之一。</div>
+                <div class="timeline-item"><strong>🕊️ 开山祖师：印度僧慧理</strong><br>见飞来峰叹为“仙灵所隐”，故建寺取名“灵隐”。</div>
+                <div class="timeline-item"><strong>👑 鼎盛时期：五代吴越国 & 南宋</strong><br>皇家尊崇，位列江南禅宗“五山”之一。</div>
+                <div class="timeline-item"><strong>✍️ 皇家赐名：清康熙帝南巡</strong><br>赐名“云林禅寺”，御笔流芳。</div>
+                <div class="badge"><i class="far fa-gem"></i> 千年法脉 · 临济正宗</div>
+            </div>
+            <div class="geo-box">
+                <h3><i class="fas fa-mountain"></i> 地理与环境</h3>
+                <p>寺址位于杭州西湖西北，<strong>背靠北高峰，面朝飞来峰</strong>。两峰环抱，古木参天，云烟缭绕，尽显“深山藏古寺”之空灵意境。</p>
+                <p><i class="fas fa-tree"></i> 周遭翠林蔽日，冷泉潺潺，春华秋实，四季皆禅。不仅是修行圣地，亦是历代文人隐逸寻幽之所。</p>
+                <div class="badge"><i class="fas fa-map-pin"></i> 西湖·灵隐景区 · 国家5A级</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 建筑与景观 详细大殿+飞来峰造像 -->
+    <section>
+        <h2 class="section-title">🏯 殿宇宏构 · 艺术瑰宝</h2>
+        <p class="section-sub">沿中轴线对称布局，气势恢弘，汇聚唐宋明清佛教营造精髓。</p>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <div class="arch-img img-tianwang"><span>📿 天王殿</span></div>
+                <div class="content">
+                    <h3>天王殿</h3>
+                    <p>供奉弥勒佛与四大天王，殿内<strong>木雕韦驮菩萨像</strong>为南宋珍贵文物，历经八百余年，神韵不减。</p>
+                </div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-img img-daxiong"><span>🙏 大雄宝殿</span></div>
+                <div class="content">
+                    <h3>大雄宝殿</h3>
+                    <p>主殿高33.6米，供奉<strong>24.8米高香樟木雕释迦牟尼佛</strong>，庄严雄伟，国内罕见，宝相慈悲。</p>
+                </div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-img img-luohan"><span>🧘 药师殿 & 罗汉堂</span></div>
+                <div class="content">
+                    <h3>药师殿 & 五百罗汉堂</h3>
+                    <p>供奉药师佛，五百罗汉堂内五百尊金身罗汉神态各异，栩栩如生，蔚为壮观。</p>
+                </div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-img img-feilaifeng"><span>🗿 飞来峰造像</span></div>
+                <div class="content">
+                    <h3>飞来峰石窟造像</h3>
+                    <p>全国重点文保，五代至元代的380多尊石窟造像。以<strong>宋代大肚弥勒佛</strong>造像最为著名，笑口常开，包容世间。</p>
+                </div>
+            </div>
+        </div>
+        <div class="badge" style="margin-top:1rem;"><i class="fas fa-palette"></i> 江南石窟艺术明珠 · 佛教艺术走廊</div>
+    </section>
+
+    <!-- 文化地位 + 济公传说与文人墨客 -->
+    <section>
+        <h2 class="section-title">📜 禅林遗韵 · 文化圣境</h2>
+        <div class="culture-show">
+            <div class="culture-text">
+                <h3><i class="fas fa-dove"></i> 禅宗祖庭 · 高僧辈出</h3>
+                <p>灵隐寺为汉传佛教临济宗重要祖庭，历代祖师慧理、永明延寿、济公活佛等高僧曾驻锡于此。宋元明清，法筵长盛，远播海外。</p>
+                <h3 style="margin-top: 1rem;">✍️ 翰墨流芳</h3>
+                <p>苏轼、白居易、乾隆皇帝等无数文人墨客留下诗篇与碑刻。“溪山处处皆可庐，最爱灵隐飞来孤”，千年文脉与佛光交相辉映。</p>
+                <div class="badge"><i class="fas fa-smile"></i> 济公传说·家喻户晓</div>
+                <p style="margin-top: 12px;">济公（道济禅师）在灵隐寺修行，疯癫行善，扶危济困，至今留有“运木古井”等传说，深入人心。</p>
+            </div>
+            <div class="culture-quote">
+                <i class="fas fa-quote-left" style="font-size: 2rem; opacity: 0.5;"></i>
+                <p style="font-weight: 500;">“溪山处处皆可庐，最爱灵隐飞来孤。”</p>
+                <small>—— 苏轼</small>
+                <hr>
+                <i class="fas fa-feather-alt"></i>  乾隆皇帝六次巡幸灵隐，御题“云林禅寺”匾额，留下众多诗碑。
+            </div>
+        </div>
+    </section>
+
+    <!-- 更多禅意细节：特色看点+趣闻 (增加高度 + 深度内容) -->
+    <section>
+        <h2 class="section-title">🌿 灵隐风物 · 禅意十景</h2>
+        <div class="grid-2cols">
+            <div class="card"><i class="fas fa-water"></i><h3>冷泉猿啸</h3><p>冷泉溪畔，古时常有猿猴啼鸣，古代“钱塘十景”之一，意境悠远。</p></div>
+            <div class="card"><i class="fas fa-pagelines"></i><h3>春淙亭 · 壑雷亭</h3><p>亭台依涧而筑，可听泉水泠泠，苏东坡常游于此，诗情画意。</p></div>
+            <div class="card"><i class="fas fa-bell"></i><h3>灵隐钟声</h3><p>晨钟暮鼓，回荡山谷，迎新祈福，洗涤尘心。</p></div>
+            <div class="card"><i class="fas fa-church"></i><h3>咫尺西天</h3><p>照壁题字，引人顿悟，佛在灵山莫远求。</p></div>
+        </div>
+        <div style="background: #e9dfd1; border-radius: 40px; margin-top: 2rem; padding: 1.2rem 2rem;">
+            <i class="fas fa-comment-dots"></i> <strong>趣闻轶事</strong>：相传济公在灵隐寺出家时，一次预知有木料从海上运来，寺僧不信，济公施展神通，让木料从古井中涌出，至今“运木古井”遗迹仍在，游客常投钱币祈福。
+        </div>
+    </section>
+
+    <!-- 旅游信息 + 门票地址 完全依据图片信息 -->
+    <section>
+        <h2 class="section-title">🎫 云林游谒 · 实用指南</h2>
+        <div class="info-wrapper">
+            <div class="info-flex">
+                <div class="info-item">
+                    <i class="fas fa-location-dot"></i> <strong>地址</strong><br>
+                    杭州市西湖区灵隐路法云弄1号
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-ticket-alt"></i> <strong>门票信息</strong><br>
+                    <span class="price-tag">飞来峰门票 ¥45</span> + <span class="price-tag">灵隐寺香花券 ¥30</span><br>
+                    <small>(进入灵隐寺需先游览飞来峰景区)</small>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i> <strong>开放时间</strong><br>
+                    07:00~18:00 (佛诞日等特殊活动另行通知)
+                </div>
+            </div>
+            <hr>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                <span><i class="fas fa-bus"></i> 公交：7路/407路/灵隐专线直达</span>
+                <span><i class="fas fa-subway"></i> 地铁3号线“黄龙洞”站换乘公交</span>
+                <button class="btn-map" onclick="alert('心诚则至 · 灵隐路法云弄1号，欢迎您祈福问禅')"><i class="fas fa-map-marker-alt"></i> 导航灵隐</button>
+            </div>
+            <div class="badge" style="margin-top: 1.5rem;"><i class="fas fa-camera"></i> 必看点：大雄宝殿、飞来峰弥勒造像、罗汉堂、古木参天</div>
+        </div>
+    </section>
+
+    <!-- 再添一份 斋饭美食/住宿推荐，使页面超过三屏，内容丰满 -->
+    <section>
+        <h2 class="section-title">🥢 素斋禅宿 · 山中食味</h2>
+        <div class="grid-2cols">
+            <div class="card">
+                <i class="fas fa-utensils"></i>
+                <h3>灵隐素斋</h3>
+                <p>寺内斋堂提供清雅素面、罗汉斋，时令蔬菜，沉浸禅意。周边亦有“知竹”素味馆等网红素食餐厅。</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bed"></i>
+                <h3>山居禅宿</h3>
+                <p>白乐桥、法云安缦等区域民宿集群，推窗见山，夜听钟声，体验“深林人不知，明月来相照”的静谧。</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hiking"></i>
+                <h3>周边漫游</h3>
+                <p>北高峰索道、永福寺、韬光寺、三天竺古道，串联灵隐三生石，寻觅江南佛国胜境。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 加一段 诗词碑刻 增加厚重感 确保内容超过三屏 -->
+    <div style="background: #e7decf; border-radius: 40px; margin: 0 0 2rem 0; padding: 2rem; text-align: center;">
+        <i class="fas fa-scroll" style="font-size: 2rem; opacity: 0.6;"></i>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; max-width: 800px; margin: 1rem auto;">“鹫岭郁岧峣，龙宫锁寂寥。楼观沧海日，门对浙江潮。” —— 宋之问《灵隐寺》</p>
+        <p style="font-size: 0.9rem;">千年诗韵，回响山门。灵隐山水间，梵呗与松涛共吟。</p>
+    </div>
+</main>
+
+<!-- 页脚简洁美观 -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>© 2025 灵隐寺 · 云林禅寺 | 互联网宗教信息服务许可证</div>
+            <div class="footer-links">
+                <i class="fab fa-weixin"></i> 官方公众号
+                <i class="fab fa-weibo"></i> 法音流布
+                <i class="fas fa-map"></i> 导览
+            </div>
+            <div><i class="fas fa-heart heart"></i> 随喜赞叹 入三摩地</div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; font-size: 0.75rem;">飞来峰下，西子湖畔，千年古刹欢迎十方善信，共结佛缘。</div>
+    </div>
+</footer>
+
+<!-- 简单添加scroll行为及响应点 无额外复杂交互 -->
+</body>
+</html>

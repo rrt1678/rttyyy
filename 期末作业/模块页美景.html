@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>杭州美景 · 湖山诗卷 | 杭旅日记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+            background: #eef3f0;
+            color: #1f3b2c;
+        }
+        /* 导航栏 — 与美食模块统一风格 */
+        .module-header {
+            background: linear-gradient(135deg, #1a5fb4, #0e3e6b);
+            padding: 20px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: "STKaiti", serif;
+            letter-spacing: 2px;
+        }
+        .nav-back {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .nav-back a {
+            color: #FFE6C7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .nav-back a:hover { color: #ffc107; }
+
+        /* 首屏大图区 — 第一屏 */
+        .hero-scenery {
+            position: relative;
+            height: 65vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"%3E%3Crect width="1200" height="600" fill="%236e9fcd"/%3E%3Ctext x="50%25" y="45%25" font-size="48" fill="white" text-anchor="middle" font-family="STKaiti"%3E杭州·湖山揽胜%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="24" fill="%23FFE6C7" text-anchor="middle"%3E一湖烟雨·十里荷风·千年禅境%3C/text%3E%3C/svg%3E') center/cover no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-scenery h1 {
+            font-size: 4rem;
+            font-family: "STKaiti", "KaiTi", serif;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 6px;
+        }
+        .hero-scenery p {
+            font-size: 1.3rem;
+            margin-top: 16px;
+            text-shadow: 1px 1px 4px black;
+        }
+
+        /* 简介区域 */
+        .intro-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+        .intro-text {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+            border-left: 8px solid #2b6e4f;
+        }
+        .intro-text h2 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #2b6e4f;
+            margin-bottom: 20px;
+        }
+        .intro-text p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #3b4d3e;
+            margin-bottom: 16px;
+        }
+
+        /* 横向图文交错布局 — 类似PDF样式 */
+        .sight-showcase {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .sight-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+            background: #ffffffcc;
+            border-radius: 48px;
+            padding: 24px;
+            backdrop-filter: blur(2px);
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .sight-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .sight-img {
+            flex: 1;
+            min-width: 250px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .sight-img img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            background: #b0c4b0;
+        }
+        .sight-info {
+            flex: 1;
+            padding: 16px;
+        }
+        .sight-info h3 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #1f5e49;
+            margin-bottom: 12px;
+        }
+        .sight-info .sub {
+            color: #6b8c5c;
+            font-style: italic;
+            margin-bottom: 16px;
+            border-left: 3px solid #2b6e4f;
+            padding-left: 12px;
+        }
+        .sight-info p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: #3e4a3a;
+        }
+        .sight-tag {
+            display: inline-block;
+            background: #e0f0e6;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #1f6e4a;
+            margin-right: 10px;
+            margin-top: 8px;
+        }
+
+        /* 文化深度扩展 — 3屏以上 */
+        .culture-deep {
+            background: #dce8df;
+            margin: 60px 0 0;
+            padding: 60px 24px;
+        }
+        .culture-deep-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .culture-deep h2 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #2b5a3e;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-bottom: 50px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-6px); }
+        .feature-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .feature-card h4 {
+            font-size: 1.4rem;
+            color: #2b6e4f;
+            margin-bottom: 12px;
+        }
+        .quote-block {
+            background: #fef5e6;
+            border-radius: 48px;
+            padding: 32px;
+            text-align: center;
+            font-family: "楷体", serif;
+            font-size: 1.2rem;
+            color: #4a5a3c;
+            margin-top: 30px;
+        }
+        /* 路线推荐模块 */
+        .route-guide {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+        .route-card {
+            background: #fff8ef;
+            border-radius: 48px;
+            padding: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .route-card h3 {
+            font-size: 1.8rem;
+            font-family: "STKaiti", serif;
+            color: #b45f2b;
+            margin-bottom: 20px;
+        }
+        .route-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: space-between;
+        }
+        .route-item {
+            flex: 1;
+            min-width: 200px;
+            background: #eef3e8;
+            border-radius: 28px;
+            padding: 18px;
+        }
+        .route-item strong {
+            color: #2b6e4f;
+            font-size: 1.1rem;
+        }
+        .copyright {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: #6c8268;
+            border-top: 1px solid #cbdcc2;
+            background: #eef3f0;
+        }
+        @media (max-width: 800px) {
+            .hero-scenery h1 { font-size: 2.2rem; }
+            .sight-row { flex-direction: column !important; }
+            .sight-info h3 { font-size: 1.6rem; }
+            .module-header { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <div class="logo-area"><a href="主页.html">🏞️ 杭旅日记</a></div>
+        <div class="nav-back">
+            <a href="主页.html">首页</a>
+            <a href="美食模块.html">美食模块</a>
+            <a href="美景模块.html">美景模块</a>
+            <a href="龙井虾仁.html">龙井虾仁</a>
+            <a href="灵隐寺.html">灵隐古刹</a>
+        </div>
+    </div>
+
+    <!-- 首屏大图区 — 第一屏 -->
+    <div class="hero-scenery">
+        <div>
+            <h1>杭州 · 湖山诗卷</h1>
+            <p>一湖烟雨 · 十里荷风 · 千年禅境</p>
+        </div>
+    </div>
+
+    <!-- 简介段落 — 第二屏顶部 -->
+    <div class="intro-section">
+        <div class="intro-text">
+            <h2>🏔️ 山水之间 · 风雅杭州</h2>
+            <p>杭州之美，在于西湖的柔波、灵隐的钟声、西溪的芦雪、运河的桨影。这座被马可·波罗称为“世界上最美丽华贵之城”的地方，处处皆诗，步步是画。从白居易到苏东坡，从“西湖十景”到“三山五园”，杭州的山水里藏着半部江南文学史。</p>
+            <p>第八种打开方式，不只是走马观花，而是以心为舟，漫溯湖山深处，与千年的风雅重逢。以下为您呈现杭州不可错过的经典景致，每一处都值得驻足凝望。</p>
+        </div>
+    </div>
+
+    <!-- 横向图文交错 — 类似PDF排版，美景列表 -->
+    <div class="sight-showcase">
+        <!-- 西湖 -->
+        <div class="sight-row">
+            <div class="sight-img">
+                <img src="大背景.png" alt="西湖">
+            </div>
+            <div class="sight-info">
+                <h3>西湖 · 人间天堂</h3>
+                <div class="sub">“欲把西湖比西子，淡妆浓抹总相宜”</div>
+                <p>世界文化遗产，中国最负盛名的淡水湖。苏堤春晓、断桥残雪、雷峰夕照、三潭印月……一湖碧水承载着千年诗文与传说。春日桃红柳绿，夏日荷风送爽，秋夜平湖秋月，冬雪断桥残雪，四季皆景。建议环湖徒步或骑行，也可乘画舫感受“船在画中游”的意境。</p>
+                <div><span class="sight-tag">#世界遗产</span><span class="sight-tag">#西湖十景</span><span class="sight-tag">#白蛇传说</span></div>
+            </div>
+        </div>
+
+        <!-- 灵隐寺 -->
+        <div class="sight-row">
+            <a href="内容页灵隐寺.html" target="_blank">
+				<div class="sight-img">
+				    <img src="灵隐寺.jpg" alt="灵隐寺">
+				</div>
+			</a>
+            <div class="sight-info">
+                <h3>灵隐寺 · 仙灵所隐</h3>
+                <div class="sub">“溪山处处皆可庐，最爱灵隐飞来孤” —— 苏轼</div>
+                <p>杭州最早的古刹，东晋咸和元年（326年）由印度高僧慧理创建，距今近1700年。背靠北高峰，面朝飞来峰，古木参天，云烟缭绕。飞来峰石窟造像群为全国重点文物，大雄宝殿24.8米香樟木佛庄严雄伟。济公和尚的传说更让这里充满传奇色彩，是东南佛国第一圣地。</p>
+                <div><span class="sight-tag">#千年古刹</span><span class="sight-tag">#禅宗祖庭</span><span class="sight-tag">#济公传说</span></div>
+            </div>
+        </div>
+
+        <!-- 西溪湿地 -->
+        <div class="sight-row">
+            <div class="sight-img">
+                <img src="西溪湿地.webp" alt="西溪湿地">
+            </div>
+            <div class="sight-info">
+                <h3>西溪湿地 · 都市桃源</h3>
+                <div class="sub">“一曲溪流一曲烟，处处是桃源”</div>
+                <p>中国首个国家湿地公园，与西湖、西泠并称“杭州三西”。曲水芦雪，摇橹船穿行于河道，秋雪庵观芦花，梅竹山庄赏梅，洪园体验南宋隐逸文化。非诚勿扰电影取景地。四季分明：春有探梅节，夏有龙舟盛会，秋有火柿节，冬有听芦节。</p>
+                <div><span class="sight-tag">#湿地探幽</span><span class="sight-tag">#摇橹船</span><span class="sight-tag">#非诚勿扰</span></div>
+            </div>
+        </div>
+
+        <!-- 京杭大运河（杭州段） -->
+        <div class="sight-row">
+            <div class="sight-img">
+                <img src="大运河.jpg" alt="京杭大运河">
+            </div>
+            <div class="sight-info">
+                <h3>京杭大运河 · 千年桨声</h3>
+                <div class="sub">“东南形胜，三吴都会，钱塘自古繁华”</div>
+                <p>世界上最长的人工运河，杭州段是南端终点。拱宸桥是运河标志，桥西历史街区保留着清末民初的民居、茶馆、扇庄、药铺。夜游运河，两岸光影演绎宋韵今辉。中国京杭大运河博物馆、手工艺活态馆、富义仓粮仓遗址，串起一部流动的漕运史诗。</p>
+                <div><span class="sight-tag">#世界遗产</span><span class="sight-tag">#拱宸桥韵</span><span class="sight-tag">#运河夜游</span></div>
+            </div>
+        </div>
+
+        <!-- 龙井村 · 九溪烟树 -->
+        <div class="sight-row">
+            <div class="sight-img">
+                <img src="九溪烟树.jpg" alt="龙井九溪">
+            </div>
+            <div class="sight-info">
+                <h3>龙井问茶 · 九溪烟树</h3>
+                <div class="sub">“茶香幽谷，溪涧十八涧”</div>
+                <p><strong>龙井村</strong>：西湖龙井茶核心产区，狮峰山上有乾隆御封的“十八棵御茶树”。品一杯明前龙井，看茶农炒茶，感受茶文化。<br>
+                <strong>九溪十八涧</strong>：位于龙井以南，溪流蜿蜒，山峦叠翠，秋日枫叶如火，是杭州本地人最爱的徒步秘境。“九溪烟树”为新西湖十景之一。</p>
+                <div><span class="sight-tag">#茶文化圣地</span><span class="sight-tag">#九溪徒步</span><span class="sight-tag">#秋色绝美</span></div>
+            </div>
+        </div>
+
+        <!-- 六和塔 + 钱塘江 -->
+        <div class="sight-row">
+            <div class="sight-img">
+                <img src="六和塔.jpg" alt="六和塔">
+            </div>
+            <div class="sight-info">
+                <h3>六和塔 · 江天一览</h3>
+                <div class="sub">“六和塔畔听涛声，月轮山上望潮涌”</div>
+                <p>北宋开宝三年（970年），吴越王为镇钱塘江潮而建。塔高近60米，登塔可俯瞰钱塘江大桥与壮阔江景。传说中《水浒传》鲁智深、武松在此圆寂。每年农历八月十八钱塘江大潮，六和塔是最佳观潮点之一。“六和听涛”为新西湖十景。</p>
+                <div><span class="sight-tag">#千年古塔</span><span class="sight-tag">#观潮胜地</span><span class="sight-tag">#钱塘江大桥</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 文化深度扩展 — 确保3屏以上 -->
+    <div class="culture-deep">
+        <div class="culture-deep-inner">
+            <h2>🏯 杭州风骨 · 不止湖山</h2>
+            <div class="feature-grid">
+                <div class="feature-card"><div class="icon">🏛️</div><h4>南宋皇城遗址</h4><p>临安城遗址、太庙、德寿宫，一窥南宋繁华旧梦</p></div>
+                <div class="feature-card"><div class="icon">🎋</div><h4>西泠印社</h4><p>孤山南麓，“天下第一名社”，金石篆刻艺术圣地</p></div>
+                <div class="feature-card"><div class="icon">📖</div><h4>文澜阁</h4><p>清代藏书楼，《四库全书》七阁之一，书香文脉所在</p></div>
+                <div class="feature-card"><div class="icon">🏮</div><h4>小河直街 · 市井烟火</h4><p>老杭州的活态记忆，茶馆、菜市、古桥，晨昏日常</p></div>
+            </div>
+            <div class="quote-block">
+                “江南忆，最忆是杭州。山寺月中寻桂子，郡亭枕上看潮头。何日更重游？” —— 白居易《忆江南》<br>
+                🌟 第八种打开方式：用脚步丈量湖山，用心触碰文脉，在灵隐钟声里听禅，在运河桨影中读史，在龙井茶香里品江南。
+            </div>
+        </div>
+    </div>
+
+    <!-- 路线推荐模块 -->
+    <div class="route-guide">
+        <div class="route-card">
+            <h3>🗺️ 经典线路推荐 · 3日揽胜杭州</h3>
+            <div class="route-flex">
+                <div class="route-item"><strong>🌿 Day 1 湖山经典</strong><br>断桥→白堤→平湖秋月→苏堤→花港观鱼→雷峰塔→夜游西湖</div>
+                <div class="route-item"><strong>🏯 Day 2 禅意悠远</strong><br>灵隐寺→飞来峰→永福寺→三天竺徒步→龙井村品茶→九溪烟树</div>
+                <div class="route-item"><strong>🚢 Day 3 运河往事</strong><br>拱宸桥→运河博物馆→手工艺活态馆→小河直街→富义仓→运河夜游</div>
+            </div>
+            <p style="margin-top: 24px; text-align: center; color: #5a6e4a;">🎫 小贴士：西湖景区可骑行或坐游览车；灵隐建议早7点前到达避开人流；运河夜游船票需提前预约。</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>© 杭旅日记 · 第八种打开方式 | 三屏以上的杭州山水长卷 | 湖山诗卷，风雅千年</p>
+        <p style="margin-top: 8px;">世界文化遗产：西湖 · 京杭大运河 | 灵隐寺 · 西溪湿地 · 六和塔 | 一城山水半城仙</p>
+    </div>
+</body>
+</html>

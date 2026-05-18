@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>龙井虾仁 · 江南雅味 | 茶香虾鲜 舌尖上的诗意杭州</title>
+    <!-- Google Fonts & 雅致字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f5ef;  /* 清雅米色底色，如茶汤 */
+            font-family: 'Inter', sans-serif;
+            color: #2b2a27;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2d9ce;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #87b38e;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* 导航栏 - 与主站风格呼应但稍作清新绿意 */
+        .navbar {
+            background: rgba(45, 55, 45, 0.92);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #b1cfaa;
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .logo-icon {
+            font-size: 1.6rem;
+            color: #c1ddb0;
+        }
+        .logo-text {
+            font-size: 1.45rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            color: #e2f0da;
+        }
+        .logo-sub {
+            font-size: 0.75rem;
+            color: #bbd9a8;
+            font-style: italic;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #edf5e6;
+            font-weight: 500;
+            font-size: 0.92rem;
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover {
+            color: #d9ee92;
+        }
+        @media (max-width: 780px) {
+            .nav-links { gap: 1.2rem; }
+            .logo-text { font-size: 1.2rem; }
+        }
+        @media (max-width: 650px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* 英雄区 龙井虾仁主视觉 */
+        .hero-dish {
+            background: linear-gradient(105deg, rgba(30,40,25,0.65), rgba(20,30,20,0.5)), url('https://picsum.photos/id/127/1600/750') center/cover no-repeat;
+            background-image: linear-gradient(120deg, rgba(35,45,28,0.7), rgba(28,38,22,0.6)), url('https://picsum.photos/id/128/1600/750');
+            background-size: cover;
+            background-position: center 40%;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-content {
+            color: white;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+            max-width: 800px;
+        }
+        .hero-content h1 {
+            font-size: 4.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-style: italic;
+            border-top: 1px solid rgba(255,248,205,0.6);
+            display: inline-block;
+            padding-top: 0.8rem;
+        }
+        .tea-badge {
+            margin-top: 1.8rem;
+            background: rgba(110, 85, 45, 0.65);
+            backdrop-filter: blur(5px);
+            padding: 6px 18px;
+            border-radius: 60px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 700px) {
+            .hero-content h1 { font-size: 2.6rem; }
+        }
+
+        /* 版面通用 */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #dfd5c4;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            border-left: 6px solid #9abf7c;
+            padding-left: 22px;
+            margin-bottom: 2rem;
+            color: #3b4a2e;
+        }
+        .subsection {
+            margin: 1.8rem 0;
+        }
+        .grid-2cols {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: #fffffffb;
+            border-radius: 28px;
+            box-shadow: 0 12px 22px -12px rgba(0,0,0,0.08);
+            padding: 1.8rem;
+            flex: 1 1 280px;
+            transition: all 0.2s;
+            border: 1px solid #e5dbc9;
+        }
+        .card i {
+            font-size: 2.2rem;
+            color: #7fa864;
+            margin-bottom: 0.8rem;
+        }
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.7rem;
+        }
+
+        /* 经典双栏典故 */
+        .origin-box {
+            background: #fef9e9;
+            border-radius: 32px;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        .legend {
+            flex: 1.2;
+            border-right: 2px dashed #c9d7b2;
+            padding-right: 2rem;
+        }
+        .feature {
+            flex: 1;
+        }
+        @media (max-width: 760px) {
+            .legend { border-right: none; border-bottom: 2px dashed #c9d7b2; padding-bottom: 1rem; }
+        }
+
+        /* 制作工艺与风味 */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .step {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.03);
+        }
+        .step-num {
+            background: #afcf93;
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #2c4020;
+            margin-bottom: 1rem;
+        }
+
+        .quote-box {
+            background: #e2efd6;
+            border-radius: 38px;
+            padding: 1.8rem 2rem;
+            font-style: italic;
+            margin: 1.5rem 0;
+            border-left: 6px solid #6f9452;
+        }
+
+        .info-card {
+            background: #fffcf2;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: 0 12px 18px -10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        footer {
+            background: #2b3524;
+            color: #cfdfbe;
+            padding: 3rem 0 2rem;
+            margin-top: 2rem;
+        }
+        .btn-ping {
+            background: #8cae71;
+            border: none;
+            padding: 8px 26px;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-ping:hover {
+            background: #6b8c4e;
+        }
+        @media (max-width: 600px) {
+            section { padding: 2.5rem 0; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 : 美食栏目高亮 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-area">
+            <i class="fas fa-utensils logo-icon"></i>
+            <span class="logo-text">杭帮风味志</span>
+            <span class="logo-sub">· 舌尖江南</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">名菜</a></li>
+            <li><a href="#">风物</a></li>
+            <li><a href="#">寻味</a></li>
+            <li><a href="#">茶馆</a></li>
+            <li><a href="#">故事</a></li>
+            <li><a href="#">食单</a></li>
+            <li><a href="#">节气</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 主视觉：龙井虾仁意境 -->
+<div class="hero-dish">
+    <div class="hero-content">
+        <h1>龙井虾仁</h1>
+        <p>玉白虾仁 · 翡翠茶香 · 一盏江南春</p>
+        <div class="tea-badge">
+            <i class="fas fa-leaf"></i> 杭州名馔 · 茶食一味
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <!-- 历史典故与起源 -->
+    <section>
+        <h2 class="section-title">🍃 茶馔传奇 · 文人食话</h2>
+        <div class="origin-box">
+            <div class="legend">
+                <h3><i class="fas fa-scroll"></i> 历史渊源</h3>
+                <p><strong>龙井虾仁</strong>，灵感源于杭州西湖龙井茶与鲜活河虾的邂逅。相传清代乾隆皇帝微服私访杭州，正值清明，品尝了用新采龙井茶入馔的炒虾仁，龙颜大悦，从此这道菜名扬天下。亦有说法称受到苏东坡《望江南》中“且将新火试新茶”启发，民国时期由杭州名店“楼外楼”改良定型，成为经典杭帮菜代表。</p>
+                <p style="margin-top: 0.8rem;">上世纪50年代，周恩来总理也曾以龙井虾仁宴请外宾，赞誉其“色清雅，味鲜美，蕴藉江南气韵”。</p>
+                <div class="badge" style="background: #cfe1bc; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; margin-top: 1rem;"><i class="fas fa-crown"></i> 开国第一宴·杭州压轴</div>
+            </div>
+            <div class="feature">
+                <h3><i class="fas fa-mug-hot"></i> 风味特色</h3>
+                <p>虾仁玉白鲜嫩，茶叶碧绿清香，二者交融，口感弹滑，茶香解腻，沁人心脾。成菜不勾浓芡，只见清汤抱汁，雅致如画，被誉为“<strong>诗画江南第一菜</strong>”。</p>
+                <ul style="margin-top: 12px; list-style-type: none;">
+                    <li><i class="fas fa-check-circle" style="color:#6f9452;"></i> 鲜活河虾手剥，保证脆嫩</li>
+                    <li><i class="fas fa-check-circle" style="color:#6f9452;"></i> 明前龙井提香，清雅悠长</li>
+                    <li><i class="fas fa-check-circle" style="color:#6f9452;"></i> 急火滑炒，锁住原汁</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制作工艺与匠心细节 篇幅深化 -->
+    <section>
+        <h2 class="section-title">🖐️ 匠心手作 · 功夫在鲜</h2>
+        <p class="subsection" style="margin-bottom: 0.5rem;">一道上品龙井虾仁，考究严苛，从选材到火候皆见功底。</p>
+        <div class="process-grid">
+            <div class="step"><div class="step-num">1</div><h3>选料 · 鲜活手剥</h3><p>选用鲜活河虾，去壳取仁，漂洗上浆，保持虾肉爽脆本味。</p></div>
+            <div class="step"><div class="step-num">2</div><h3>茶萃 · 明前龙井</h3><p>取清明前龙井嫩芽，70℃泉水泡开，取其茶汁与茶叶点缀。</p></div>
+            <div class="step"><div class="step-num">3</div><h3>滑炒 · 一气呵成</h3><p>虾仁入温油滑散，沥油后快速烹入茶汁、少许盐，茶叶点缀，旺火十秒即成。</p></div>
+            <div class="step"><div class="step-num">4</div><h3>雅呈 · 淡妆浓抹</h3><p>盛器如玉，虾仁与碧绿茶芽相映，清鲜满口，留香齿颊。</p></div>
+        </div>
+        <div class="quote-box">
+            <i class="fas fa-quote-left" style="margin-right: 10px;"></i> 龙井虾仁之美，在于茶不压鲜，鲜不夺茶。口感如西湖烟雨，温润而轻盈。
+            <div style="margin-top: 10px;">—— 杭帮菜泰斗·胡忠英</div>
+        </div>
+    </section>
+
+    <!-- 品鉴与寻味指南 餐厅推荐 -->
+    <section>
+        <h2 class="section-title">🍽️ 寻味杭城 · 必吃榜单</h2>
+        <div class="grid-2cols">
+            <div class="card">
+                <i class="fas fa-store"></i>
+                <h3>楼外楼（孤山路店）</h3>
+                <p>百年老店，传承经典。楼外楼龙井虾仁采用传统技法，虾仁晶莹，茶香馥郁，坐享西湖美景。</p>
+                <div class="badge"><i class="fas fa-map-marker-alt"></i> 西湖区孤山路30号</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-leaf"></i>
+                <h3>杭州酒家</h3>
+                <p>老字号创新演绎，茶香虾仁伴以秘制高汤，鲜上加鲜，入选“黑珍珠”推荐。</p>
+                <div class="badge"><i class="fas fa-trophy"></i> 地道杭帮菜代表</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-water"></i>
+                <h3>西湖国宾馆·紫薇厅</h3>
+                <p>国宴级出品，虾仁选用太湖白虾，龙井茶产自狮峰，极尽考究，回味悠长。</p>
+                <div class="badge"><i class="fas fa-star"></i> 精致飨宴</div>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; background: #fef8e7; padding: 1.2rem 1.8rem; border-radius: 60px; display: inline-block; width: 100%;">
+            <i class="fas fa-clock"></i> 最佳品尝时节：春季（3-5月），新茶与河虾共此时，最鲜活的江南春味。
+        </div>
+    </section>
+
+    <!-- 文化意境 + 诗词茶道 与龙井虾仁精神内核 -->
+    <section>
+        <h2 class="section-title">📖 诗茶一味 · 风雅之馔</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex: 1.5; background: #fef7e3; border-radius: 32px; padding: 1.8rem;">
+                <i class="fas fa-feather-alt"></i>
+                <h3>文人墨客的灵感</h3>
+                <p>“欲把西湖比西子，淡妆浓抹总相宜。” 龙井虾仁正如西子般清新脱俗，淡雅中见精致。梁实秋、汪曾祺等作家皆在散文中赞赏过这道菜的清鲜风骨，将品茶与食虾的意趣融合，成为一种生活美学。</p>
+                <p style="margin-top: 0.8rem;">京剧大师梅兰芳也偏爱龙井虾仁，称其“甘香芳冽，有山林清气”。</p>
+            </div>
+            <div style="flex: 1; background: #ddecd0; border-radius: 32px; padding: 1.5rem; text-align: center;">
+                <i class="fas fa-hand-peace"></i>
+                <h3>品鉴礼仪</h3>
+                <p>先呷一口龙井茶清口，再尝虾仁，细品虾鲜与茶韵交融。搭配一小碟镇江香醋，别具风味，更能体会杭州菜“清淡平和”之妙。</p>
+                <div class="badge" style="background: #bace9a;">🫖 餐后一盏龙井 · 余味悠长</div>
+            </div>
+        </div>
+        <!-- 添加 相关趣闻，增加页面纵深超3屏 -->
+        <div class="quote-box" style="background: #f3efe2; margin-top: 2rem;">
+            <i class="fas fa-hand-sparkles"></i> <strong>趣闻轶事</strong> · 相传龙井虾仁的诞生与乾隆下江南有关，一次在茶农家品尝龙井新茶后，厨师灵机一动，将茶叶入菜炒虾仁，顿时清香四溢，乾隆赞不绝口。从此这道菜便进入宫廷，成为经典御膳。
+        </div>
+    </section>
+
+    <!-- 家常版制作贴士 + 互动 -->
+    <section>
+        <h2 class="section-title">👩‍🍳 家宴雅趣 · 复刻秘籍</h2>
+        <div class="info-card">
+            <div style="flex: 2;">
+                <i class="fas fa-kitchen-set"></i>
+                <h3>家庭简易版小贴士</h3>
+                <p>1. 鲜虾去壳开背，用蛋清、淀粉、盐抓匀上浆，冷藏20分钟。<br>
+                2. 龙井茶叶用80℃水泡开，沥出茶汤，茶叶留用。<br>
+                3. 热锅凉油滑熟虾仁捞出，底油加茶汤、少许糖盐，入虾仁和茶叶快速翻炒。<br>
+                4. 水淀粉薄芡，淋香油出锅。<br>
+                关键：火候要快，茶叶不能久炒，保留翠绿。</p>
+                <button class="btn-ping" onclick="alert('茶香雅韵，亲手烹饪一份春日诗意吧🍤🍃')"><i class="fas fa-print"></i> 收藏食谱</button>
+            </div>
+            <div style="flex:1; text-align: center;">
+                <i class="fas fa-chinese-yuan" style="font-size: 2.8rem; color: #759653;"></i>
+                <p><strong>人均参考</strong><br>餐厅 ¥88~188<br>家常成本 ¥35/份</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 茶与食的深入扩展 龙井产地 -->
+    <section style="border-bottom: none; padding-bottom: 2rem;">
+        <div style="background: linear-gradient(130deg, #f1f2e6, #fdfaef); border-radius: 40px; padding: 2rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+                <div><i class="fas fa-tree" style="font-size: 3rem; color:#89a967;"></i></div>
+                <div><h3 style="font-family: 'Playfair Display';">茶香溯源 · 狮峰龙井与这道菜的灵魂</h3>
+                <p>龙井虾仁所选用的茶叶以西湖龙井核心产区——狮峰山、龙井村一带的明前茶为最佳。茶叶嫩绿清香，氨基酸含量高，入菜后带来豆香与兰花香，方能成就经典风骨。品龙井虾仁，品的不止是鲜美，更是西湖山水与千年茶韵。</p></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- 页脚部分 -->
+<footer>
+    <div class="container">
+        <div class="footer-content" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div><i class="fas fa-utensil-spoon"></i> 杭帮味道 · 人间清欢</div>
+            <div><i class="fab fa-weixin"></i> 寻味杭州  |  <i class="fab fa-sina-weibo"></i> 江南食话</div>
+            <div>© 2025 龙井虾仁文化志 | 茶与食的东方美学</div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #b6cf9b;">春水春茶，一盘玉白翠绿，是杭州最温柔的款待。</div>
+    </div>
+</footer>
+</body>
+</html>

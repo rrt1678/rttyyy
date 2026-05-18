@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>杭州美食 · 舌尖江南 | 杭旅日记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+            background: #fef7e8;
+            color: #2c3e2f;
+        }
+        /* 导航栏 */
+        .module-header {
+            background: linear-gradient(135deg, #1a5fb4, #0e3e6b);
+            padding: 20px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: "STKaiti", serif;
+            letter-spacing: 2px;
+        }
+        .nav-back {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .nav-back a {
+            color: #FFE6C7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .nav-back a:hover { color: #ffc107; }
+
+        /* 首屏横幅 — 类似PDF大图+标题 */
+        .hero-food {
+            position: relative;
+            height: 65vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"%3E%3Crect width="1200" height="600" fill="%23c0aa7a"/%3E%3Ctext x="50%25" y="45%25" font-size="48" fill="white" text-anchor="middle" font-family="STKaiti"%3E杭州·龙井虾仁%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="24" fill="%23FFE6C7" text-anchor="middle"%3E茶香入馔·江南至味%3C/text%3E%3C/svg%3E') center/cover no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-food h1 {
+            font-size: 4rem;
+            font-family: "STKaiti", "KaiTi", serif;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 6px;
+        }
+        .hero-food p {
+            font-size: 1.3rem;
+            margin-top: 16px;
+            text-shadow: 1px 1px 4px black;
+        }
+
+        /* 简介区域 — 类似PDF中的文字段落 */
+        .intro-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+        .intro-text {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+            border-left: 8px solid #e89b3e;
+        }
+        .intro-text h2 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #b45f2b;
+            margin-bottom: 20px;
+        }
+        .intro-text p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #4a3b28;
+            margin-bottom: 16px;
+        }
+
+        /* 横向图文交错布局 — 类似PDF中图片+文字左右交替 */
+        .dish-showcase {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .dish-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+            background: #ffffffcc;
+            border-radius: 48px;
+            padding: 24px;
+            backdrop-filter: blur(2px);
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .dish-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .dish-img {
+            flex: 1;
+            min-width: 250px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .dish-img img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            background: #d9c8ae;
+        }
+        .dish-info {
+            flex: 1;
+            padding: 16px;
+        }
+        .dish-info h3 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #bd6b2a;
+            margin-bottom: 12px;
+        }
+        .dish-info .sub {
+            color: #8b6b3c;
+            font-style: italic;
+            margin-bottom: 16px;
+            border-left: 3px solid #e89b3e;
+            padding-left: 12px;
+        }
+        .dish-info p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: #3e3627;
+        }
+        .dish-tag {
+            display: inline-block;
+            background: #ffedd5;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #a55217;
+            margin-right: 10px;
+            margin-top: 8px;
+        }
+
+        /* 文化延伸 — 增加高度至3屏以上 */
+        .culture-deep {
+            background: #e6dac8;
+            margin: 60px 0 0;
+            padding: 60px 24px;
+        }
+        .culture-deep-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .culture-deep h2 {
+            font-size: 2rem;
+            font-family: "STKaiti", serif;
+            color: #5c3e1f;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 50px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-6px); }
+        .feature-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .feature-card h4 {
+            font-size: 1.4rem;
+            color: #b45f2b;
+            margin-bottom: 12px;
+        }
+        .quote-block {
+            background: #fcf4e3;
+            border-radius: 48px;
+            padding: 32px;
+            text-align: center;
+            font-family: "楷体", serif;
+            font-size: 1.2rem;
+            color: #5a442a;
+            margin-top: 30px;
+        }
+        .copyright {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: #ad9b82;
+            border-top: 1px solid #d4c4ac;
+            background: #fef7e8;
+        }
+        @media (max-width: 800px) {
+            .hero-food h1 { font-size: 2.2rem; }
+            .dish-row { flex-direction: column !important; }
+            .dish-info h3 { font-size: 1.6rem; }
+            .module-header { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="module-header">
+        <div class="logo-area"><a href="主页.html">🍃 杭旅日记</a></div>
+        <div class="nav-back">
+            <a href="主页.html">首页</a>
+            <a href="美景模块.html">美景模块</a>
+            <a href="美食模块.html">美食模块</a>
+            <a href="龙井虾仁.html">龙井虾仁</a>
+            <a href="灵隐寺.html">灵隐古刹</a>
+        </div>
+    </div>
+
+    <!-- 首屏大图区 — 第一屏 -->
+    <div class="hero-food">
+        <div>
+            <h1>杭州 · 舌尖上的江南</h1>
+            <p>从龙井虾仁到西湖醋鱼 | 千年杭帮菜的雅致与烟火</p>
+        </div>
+    </div>
+
+    <!-- 简介段落 — 第二屏顶部 -->
+    <div class="intro-section">
+        <div class="intro-text">
+            <h2>🍜 风雅之味 · 杭州食事</h2>
+            <p>杭州菜讲究“清淡、鲜嫩、雅致”，汲取西湖山水灵秀与南宋御膳遗风，以茶入馔，以湖鲜为美。龙井虾仁、西湖醋鱼、东坡肉、宋嫂鱼羹……每一道菜都承载着江南文人的诗意与市井的温情。1956年认定的36道杭州名菜，至今仍是老杭州人宴客、游子思乡的味觉符号。</p>
+            <p>在这里，美食不仅是果腹之物，更是文化与自然的对话。第八种打开方式，从舌尖开始，读懂杭州的风骨与柔情。</p>
+        </div>
+    </div>
+
+    <!-- 横向图文交错 — 类似PDF排版，每道菜占据较大篇幅，三屏以上内容 -->
+    <div class="dish-showcase">
+        <!-- 龙井虾仁 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <a href="内容页龙井虾仁.html" target="_blank">
+				    <img src="虾仁.jpg" alt="龙井虾仁">
+				</a>
+            </div>
+            <div class="dish-info">
+                <h3>龙井虾仁</h3>
+                <div class="sub">“且将新火试新茶，诗酒趁年华”</div>
+                <p>龙井虾仁是杭州第一名菜，以鲜活河虾仁与明前龙井嫩芽同炒，虾仁玉白，茶叶碧绿，茶香清幽，虾鲜弹牙。1956年入选杭州36名菜，2018年浙江十大经典名菜，曾多次登上国宴。这道菜体现了杭州“清雅本味”的饮食哲学，也是苏东坡诗意与江南风物的完美结合。</p>
+                <div><span class="dish-tag">#国宴名菜</span><span class="dish-tag">#茶香四溢</span><span class="dish-tag">#春季限定</span></div>
+            </div>
+        </div>
+
+        <!-- 西湖醋鱼 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <img src="醋鱼.webp" alt="西湖醋鱼">
+            </div>
+            <div class="dish-info">
+                <h3>西湖醋鱼</h3>
+                <div class="sub">“裙屐联翩买醉来，绿阳影里上楼台”</div>
+                <p>选用西湖草鱼，烹制后浇上平滑油亮的糖醋芡汁，鱼肉嫩滑，酸甜适中，带有独特的蟹味。传说源于南宋“叔嫂传珍”的故事，是杭帮菜的当家花旦。正宗西湖醋鱼讲究“七刀半”，展现江南厨师精湛刀工与火候掌控。</p>
+                <div><span class="dish-tag">#杭州头牌</span><span class="dish-tag">#酸甜开胃</span><span class="dish-tag">#百年传承</span></div>
+            </div>
+        </div>
+
+        <!-- 东坡肉 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <img src="东坡肉.webp" alt="东坡肉">
+            </div>
+            <div class="dish-info">
+                <h3>东坡焖肉</h3>
+                <div class="sub">“慢著火，少著水，火候足时它自美”</div>
+                <p>大文豪苏东坡在杭州任职期间创制，精选五花肉，以黄酒、酱油、冰糖慢火焖制数小时，成品色泽红亮，肥而不腻，酥烂如豆腐，入口即化。这一碗肉，既是文人风骨的体现，也是杭州百姓最温暖的记忆。</p>
+                <div><span class="dish-tag">#文人菜</span><span class="dish-tag">#浓油赤酱</span><span class="dish-tag">#下饭神器</span></div>
+            </div>
+        </div>
+
+        <!-- 宋嫂鱼羹 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <img src="宋嫂鱼羹.jpg" alt="宋嫂鱼羹">
+            </div>
+            <div class="dish-info">
+                <h3>宋嫂鱼羹</h3>
+                <div class="sub">“一碗鱼羹抵万金，南宋御膳到如今”</div>
+                <p>源自南宋淳熙年间，以鳜鱼或鲈鱼为主料，辅以火腿丝、竹笋、香菇等，汤浓味醇，鲜嫩滑润。相传宋五嫂在西湖边售卖此羹，被宋高宗品尝后赞不绝口，从此成为御膳名菜。千年之后，依然是杭州人宴客时必点的汤羹。</p>
+                <div><span class="dish-tag">#南宋御膳</span><span class="dish-tag">#鲜掉眉毛</span><span class="dish-tag">#非遗风味</span></div>
+            </div>
+        </div>
+
+        <!-- 叫花鸡 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <img src="叫花鸡.jpg" alt="叫花鸡">
+            </div>
+            <div class="dish-info">
+                <h3>叫花童鸡</h3>
+                <div class="sub">“荷香泥封古法烤，酥烂脱骨奇味香”</div>
+                <p>用荷叶包裹整鸡，再以黄泥密封烤制，鸡肉酥烂脱骨，荷香与肉香交融。传说源于乞丐的发明，后被杭州名厨改良，成为独具野趣的杭帮名菜。开坛时香气四溢，是杭帮菜中仪式感最强的菜品之一。</p>
+                <div><span class="dish-tag">#古法烤制</span><span class="dish-tag">#荷叶清香</span><span class="dish-tag">#宴客大菜</span></div>
+            </div>
+        </div>
+
+        <!-- 片儿川 + 定胜糕 合并为风味小吃板块增加高度 -->
+        <div class="dish-row">
+            <div class="dish-img">
+                <img src="定胜糕.webp" alt="片儿川定胜糕">
+            </div>
+            <div class="dish-info">
+                <h3>片儿川 · 定胜糕</h3>
+                <div class="sub">市井烟火与南宋遗韵</div>
+                <p><strong>片儿川</strong>：杭州最著名的汤面，雪菜、笋片、瘦肉丝，汤头鲜醇，面滑料足，是杭州人每天的早餐灵魂。传说为南宋士子赶考而创，寓意“连中三元”。</p>
+                <p><strong>定胜糕</strong>：米粉包裹豆沙，松软香甜，传为南宋韩世忠犒军点心，象征旗开得胜。如今是杭州人节庆、乔迁必不可少的吉祥糕点。</p>
+                <div><span class="dish-tag">#必吃汤面</span><span class="dish-tag">#南宋点心</span><span class="dish-tag">#老底子味道</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 文化深度扩展 — 确保3屏以上总高度 -->
+    <div class="culture-deep">
+        <div class="culture-deep-inner">
+            <h2>🏮 杭帮菜 · 舌尖上的文化密码</h2>
+            <div class="feature-grid">
+                <div class="feature-card"><div class="icon">🍵</div><h4>茶与食</h4><p>龙井入菜不仅是龙井虾仁，还有茶香鸡、抹茶糕，杭帮菜擅用本地风物。</p></div>
+                <div class="feature-card"><div class="icon">🏯</div><h4>南宋遗风</h4><p>宋嫂鱼羹、蟹酿橙、定胜糕，皆从临安御膳房中走来，千年不绝。</p></div>
+                <div class="feature-card"><div class="icon">🌿</div><h4>不时不食</h4><p>春尝河鲜、夏品荷香、秋食蟹膏、冬饮羊肉，顺时而食是杭州人的养生智慧。</p></div>
+               <div class="feature-card"><div class="icon">📖</div><h4>文人宴集</h4><p>从苏东坡到袁枚，文人参与美食创作，让杭帮菜自带诗书气质。</p></div>
+            </div>
+            <div class="quote-block">
+                “西湖醋鱼何处美，独数杭州楼外楼。” —— 梁实秋<br>
+                🌟 第八种打开方式：吃透杭州，不仅是味蕾的满足，更是与千年文脉的一场对谈。从名楼雅宴到街头小馆，每一口都有故事。
+            </div>
+        </div>
+    </div>
+
+    <!-- 名店推荐 + 美食路线，进一步提升内容丰富度 -->
+    <div style="max-width: 1100px; margin: 50px auto; padding: 0 24px;">
+        <div style="background: #fff3e2; border-radius: 48px; padding: 32px;">
+            <h3 style="font-size: 1.8rem; font-family: 'STKaiti'; color:#b45f2b; margin-bottom: 20px;">📍 寻味指南 · 老字号与烟火巷</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+                <div style="flex:1; min-width: 200px;"><strong>🏆 百年老店</strong><br>楼外楼 · 山外山 · 杭州酒家 · 奎元馆</div>
+                <div style="flex:1; min-width: 200px;"><strong>🍜 街头烟火</strong><br>中山南路美食街 · 河坊街小吃 · 胜利河夜宵</div>
+                <div style="flex:1; min-width: 200px;"><strong>🗺️ 美食路线</strong><br>上午龙井村品茶 → 午餐绿茶餐厅 → 下午河坊街定胜糕 → 晚餐楼外楼品醋鱼</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>© 杭旅日记 · 第八种打开方式 | 三屏以上的杭州美食长卷 | 茶香诗韵，舌尖江南</p>
+        <p style="margin-top: 8px;">本页面呈现杭州经典名菜 | 1956年36道杭州名菜传承 | 国宴风味走入寻常百姓家</p>
+    </div>
+</body>
+</html>
